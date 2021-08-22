@@ -35,6 +35,8 @@ namespace MonenceApi
 
             services.AddScoped<IAccountService, AccountService>();
 
+            services.AddScoped<ITransactionService, TransactionService>();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>

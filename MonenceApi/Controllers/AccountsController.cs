@@ -36,15 +36,11 @@ namespace MonenceApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IAsyncEnumerable<Account>>> Register(string email)
+        public async Task<ActionResult<Account>> Register(string email)
         {
             try
             {
-                Account account = new Account
-                {
-                    Email = email
-                };
-                await _accountService.Create(account);
+                await _accountService.Create(email);
                 return Ok("Conta criada com sucesso!");
             }
             catch

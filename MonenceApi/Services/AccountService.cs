@@ -17,13 +17,14 @@ namespace MonenceApi.Services
             _context = context;
         }
 
-        public async Task Create(Account account)
+        public async Task Create(string email)
         {
             try
             {
-                _context.Accounts.Add(account);
+                _context.Accounts.Add(new Account { Email = email });
                 await _context.SaveChangesAsync();
-            }catch
+            }
+            catch
             {
                 throw;
             }
@@ -35,6 +36,32 @@ namespace MonenceApi.Services
             {
 
                 return await _context.Accounts.Where(a => a.Email == email).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Account> GetById(int id)
+        {
+            try
+            {
+
+                return await _context.Accounts.FindAsync(id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task Update(Account account)
+        {
+            try
+            {
+                _context.Entry(account).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
             }
             catch
             {

@@ -11,8 +11,10 @@ namespace MonenceApi.Services.Interfaces
 
         Task<Transaction> GetById(int id);
 
-        Task<Transaction> GetByDate(DateTime initialDate, DateTime finalDate);
+        Task<IEnumerable<Transaction>> GetByDate(DateTime initialDate, DateTime finalDate);
 
         Task Create(Transaction transaction);
+
+        Task AddEntry(int accountId, decimal amount);
     }
 }
