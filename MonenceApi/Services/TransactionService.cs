@@ -80,7 +80,7 @@ namespace MonenceApi.Services
 
                 Transaction transaction = new Transaction
                 {
-                    Account = account,
+                    Account =account,
                     Amount = amount,
                     Date = DateTime.Now
                 };

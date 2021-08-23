@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MonenceApi.Models;
+using MonenceApi.Models.Jsons;
 using MonenceApi.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -65,11 +66,11 @@ namespace MonenceApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Transaction>> AddEntry(int accountId, Decimal amount)
+        public async Task<ActionResult<Transaction>> AddEntry([FromBody] JsonTransaction jsonTransaction)
         {
             try
             {
-                await _transactionService.AddEntry(accountId, amount);
+                await _transactionService.AddEntry(jsonTransaction.AccountId, jsonTransaction.Amount);
                 return Ok("Transação efetuada com sucesso!");
             }
             catch

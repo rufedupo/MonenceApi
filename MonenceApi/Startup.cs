@@ -39,6 +39,10 @@ namespace MonenceApi
 
             services.AddControllers();
 
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                                                                            .AllowAnyMethod()
+                                                                            .AllowAnyHeader()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MonenceApi", Version = "v1" });
@@ -54,6 +58,8 @@ namespace MonenceApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MonenceApi v1"));
             }
+
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
 

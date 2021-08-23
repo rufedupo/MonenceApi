@@ -27,25 +27,17 @@ namespace MonenceApi.Controllers
             try
             {
                 var account = await _accountService.GetByEmail(email);
+                if (account == null)
+                {
+                    await _accountService.Create(email);
+                    account = await _accountService.GetByEmail(email);
+                }
+
                 return Ok(account);
             }
             catch
             {
-                return BadRequest("Não foi possível encontrar este email.");
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Account>> Register(string email)
-        {
-            try
-            {
-                await _accountService.Create(email);
-                return Ok("Conta criada com sucesso!");
-            }
-            catch
-            {
-                return BadRequest("Não foi possível criar conta.");
+                return BadRequest("Ocorreu um erro no servidor!");
             }
         }
     }
